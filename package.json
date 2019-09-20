@@ -1,7 +1,7 @@
 {
 	"name": "yang-2020-policies",
-	"version": "0.0.0",
-	"description": "Get a list of all of Andrew Yang&#39;s policies for his 2020 campaign.",
+	"version": "0.1.0",
+	"description": "A consumable JSON list of Andrew Yang's 2020 policies found on yang2020.com",
 	"license": "MIT",
 	"repository": "brh55/yang-2020-policies",
 	"author": {
@@ -20,7 +20,11 @@
 		"index.js"
 	],
 	"keywords": [
-		""
+		"andrew yang 2020",
+		"MATH",
+		"yang 2020 policies",
+		"andrew yang policies",
+		"UBI"
 	],
 	"dependencies": {
 		"request-promise-native": "^1.0.7"

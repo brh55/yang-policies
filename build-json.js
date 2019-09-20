@@ -20,7 +20,13 @@ const parsePolicy = (policyPage, url) => {
 	const goals = $('.goals li').map((i, el) => $(el).text()).get();
 	const mainQuote = $('blockquote').text();
 	const asPresident = $('.as-president').text();
-	const excerpt = $('.excerpt p').text();
+	const excerpt = $('.excerpt p').map((i, el) => {
+		if ($(el).find('cite').length > 0) {
+			return null;
+		}
+
+		return $(el).text();
+	}).get().join('');
 	// Exception, format here
 
 	const citations = $('.excerpt p').map((i, el) => ({

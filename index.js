@@ -1,9 +1,6 @@
 'use strict';
+const policies = require('./policies.json');
 
-module.exports = (input, {postfix = 'rainbows'} = {}) => {
-	if (typeof input !== 'string') {
-		throw new TypeError(`Expected a string, got ${typeof input}`);
-	}
-
-	return `${input} & ${postfix}`;
-};
+module.exports = policies;
+module.exports.count = policies.length;
+module.exports.featured = () => policies.slice(0, 3);
