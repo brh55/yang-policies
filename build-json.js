@@ -1,7 +1,7 @@
+const fs = require('fs');
 const rp = require('request-promise-native');
 const cheerio = require('cheerio');
 const uniq = require('lodash.uniq');
-const fs = require('fs');
 const ora = require('ora');
 const chalk = require('chalk');
 
@@ -34,6 +34,7 @@ const parsePolicy = (policyPage, url) => {
 		quote: format($(el).find('q').text())
 	})).get().filter(citation => citation.author && citation.quote);
 
+	/* eslint-disable camelcase */
 	const policy = {
 		title,
 		url,
@@ -43,10 +44,11 @@ const parsePolicy = (policyPage, url) => {
 		goals: goals || null,
 		as_president: asPresident || null,
 		excerpt: excerpt || null,
-		citations: citations || null,
+		citations: citations || null
 	};
+	/* eslint-enable */
 
-	Object.keys(policy).map(key => {
+	Object.keys(policy).forEach(key => {
 		const value = policy[key];
 		if (typeof value === 'string') {
 			policy[key] = format(value);
@@ -61,40 +63,37 @@ const parsePolicy = (policyPage, url) => {
 	return policy;
 };
 
-const main = () => {
+const main = async () => {
 	const spinner = ora('Fetching Policies').start();
 	spinner.color = 'magenta';
 
-	const BASE_URL = 'https://www.yang2020.com'
+	const BASE_URL = 'https://www.yang2020.com';
 	const POLICY_MAIN_URL = `${BASE_URL}/policies`;
 
-	rp(POLICY_MAIN_URL)
-		.then(resp => {
-			const $ = cheerio.load(resp);
-			const getPolicyLink = (i, el) => $(el).attr('href');
-			const featuredPolicies = $('.featured-policies a').map(getPolicyLink).get().map(relativeLink => `${BASE_URL}${relativeLink}`);
-			const otherPolicies = $('.policies a').map(getPolicyLink).get();
-			const policyLinks = uniq([...featuredPolicies, ...otherPolicies]);
-			spinner.succeed(`Found Andrew Yang's ${policyLinks.length} Policies`);
-			spinner.start(`Fetching Andrew Yang's ${policyLinks.length} Policies`);
-			const fetchPoliciesPromise = policyLinks.map(rp);
+	try {
+		const mainPolicyPage = await rp(POLICY_MAIN_URL);
+		const $ = cheerio.load(mainPolicyPage);
+		const getPolicyLink = (i, el) => $(el).attr('href');
+		const featuredPolicies = $('.featured-policies a').map(getPolicyLink).get().map(relativeLink => `${BASE_URL}${relativeLink}`);
+		const otherPolicies = $('.policies a').map(getPolicyLink).get();
+		const policyLinks = uniq([...featuredPolicies, ...otherPolicies]);
+		spinner.succeed(`Found Andrew Yang's ${policyLinks.length} Policies`);
 
-			Promise
-				.all(fetchPoliciesPromise)
-				.then(policyPages => {
-					spinner.succeed(`Loaded ${policyLinks.length} Pages`);
-					spinner.start(`Parsing Andrew Yang's ${policyLinks.length} Policies`);
+		spinner.start(`Fetching Andrew Yang's ${policyLinks.length} Policies`);
+		const fetchPoliciesPromise = policyLinks.map(rp);
+		const policyPages = await Promise.all(fetchPoliciesPromise);
+		spinner.succeed(`Loaded ${policyLinks.length} Pages`);
 
-					const policies = policyPages.map((html, index) => {
-						return parsePolicy(html, policyLinks[index]);
-					});
-					fs.writeFileSync('policies.json', JSON.stringify(policies, null, 2));
-					spinner.succeed(`${policies.length} Andrew Yang's Policies Saved in /policies.json`);
-					console.log(chalk.green('Commit the latest policies.json file, and publish on npm'));
-				})
-				.catch(console.error);
-		})
-		.catch(console.error);
-}
+		spinner.start(`Parsing Andrew Yang's ${policyLinks.length} Policies`);
+		const policies = policyPages.map((html, index) => {
+			return parsePolicy(html, policyLinks[index]);
+		});
+		fs.writeFileSync('policies.json', JSON.stringify(policies, null, 2));
+		spinner.succeed(`${policies.length} Andrew Yang's Policies Saved in /policies.json`);
+		console.log(chalk.green('Commit the latest policies.json file, and publish on npm'));
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 main();

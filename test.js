@@ -3,7 +3,7 @@ import yangPolicies from '.';
 
 test('Valid JSON', t => {
 	t.is(typeof yangPolicies, 'object');
-	console.log(yangPolicies)
+	console.log(yangPolicies);
 });
 
 test('.featured()', t => {
