@@ -12,6 +12,8 @@ $ npm install yang-2020-policies
 
 ## Usage
 
+JSON file is located in [`/policies.json`](https://github.com/brh55/yang-2020-policies/blob/master/policies.json)
+
 ```js
 const yangPolicies = require('yang-2020-policies');
 
@@ -73,8 +75,7 @@ yangPolicies[0] // First Policy is The Freedom Dividend
 ```
 
 ## Contribute
-
-Open to PR's to improve the JSON formatting, code quality, and anything else to help the overall Yang Gang.
+Open to PR's to improve the JSON formatting, code quality, different file formats, tests, etc.
 
 ## License
 The use of this module falls under MIT, use it to build and progress the Yang Gang. 
