@@ -1,9 +1,9 @@
 {
-	"name": "yang-2020-policies",
+	"name": "yang-policies",
 	"version": "0.1.0",
 	"description": "A consumable JSON list of Andrew Yang's 2020 policies found on yang2020.com",
 	"license": "MIT",
-	"repository": "brh55/yang-2020-policies",
+	"repository": "brh55/yang-policies",
 	"author": {
 		"name": "brh55",
 		"email": "brandonhim@live.com",
@@ -17,6 +17,7 @@
 		"build-json": "node build-json.js"
 	},
 	"files": [
+		"policies.json",
 		"index.js"
 	],
 	"keywords": [

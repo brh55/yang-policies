@@ -1,4 +1,4 @@
-# Yang 2020 Policies [![Build Status](https://travis-ci.com/brh55/yang-2020-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-2020-policies) [![codecov](https://codecov.io/gh/brh55/yang-2020-policies/badge.svg?branch=master)](https://codecov.io/gh/brh55/yang-2020-policies?branch=master) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
+# Andrew Yang Policies -- 2020 [![Build Status](https://travis-ci.com/brh55/yang-2020-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-2020-policies) [![codecov](https://codecov.io/gh/brh55/yang-2020-policies/badge.svg?branch=master)](https://codecov.io/gh/brh55/yang-2020-policies?branch=master) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
 
 > A consumable JSON list of Andrew Yang's 2020 policies found on [yang2020.com](https://www.yang2020.com/policies/)
 
@@ -7,15 +7,15 @@ Given the tremendous amount of policies around Andrew Yang's campaigin, I couldn
 ## Install
 
 ```
-$ npm install yang-2020-policies
+$ npm install yang-policies
 ```
 
 ## Usage
 
-JSON file is located in [`/policies.json`](https://github.com/brh55/yang-2020-policies/blob/master/policies.json)
+JSON file is located in [`/policies.json`](https://github.com/brh55/yang-policies/blob/master/policies.json)
 
 ```js
-const yangPolicies = require('yang-2020-policies');
+const yangPolicies = require('yang-policies');
 
 yangPolicies[0] // First Policy is The Freedom Dividend
 ```
@@ -77,7 +77,9 @@ yangPolicies[0] // First Policy is The Freedom Dividend
 ## Contribute
 Open to PR's to improve the JSON formatting, code quality, different file formats, tests, etc.
 
+Build the JSON file with, `npm run build-json`.
+
 ## License
-The use of this module falls under MIT, use it to build and progress the Yang Gang. 
+The use of this module falls under MIT, use it to build and progress the Yang Gang.
 
 If it isn't apparent, actual policy content belongs to [yang2020.com](https://www.yang2020.com/).
