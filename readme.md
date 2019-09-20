@@ -3,7 +3,7 @@
 
 > A consumable JSON list of Andrew Yang's 2020 policies found on [yang2020.com](https://www.yang2020.com/policies/)
 
-Given the tremendous amount of policies around Andrew Yang's campaigin, I couldn't manage to find any API's providing this information. So I built this JSON list which crawls and scrapes yang2020.com to create an updated JSON consumable list of Andrew Yang's policies for any potential software projects.
+Despite the tremendous amount of policies from Andrew Yang's campaign, I couldn't manage to find any API's providing this information. So I built this JSON list from a simple script that crawls and scrapes yang2020.com to create an JSON formatted list of Andrew Yang's policies to be used for any potential software projects.
 
 ## Install
 
@@ -13,7 +13,7 @@ $ npm install yang-policies
 
 ## Usage
 
-JSON file is located in [`/policies.json`](https://github.com/brh55/yang-policies/blob/master/policies.json)
+The JSON file is located in [`/policies.json`](https://github.com/brh55/yang-policies/blob/master/policies.json), which can be downloaded and used externally.
 
 ```js
 const yangPolicies = require('yang-policies');
