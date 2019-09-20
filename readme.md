@@ -51,7 +51,7 @@ yangPolicies[0] // First Policy is The Freedom Dividend
 
 **Policy Example**:
 
-```
+```json
  {
     "title": "Promote Vocational Education",
     "url": "https://www.yang2020.com/policies/promoting-vocational-education/",
