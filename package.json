@@ -1,0 +1,45 @@
+{
+	"name": "yang-2020-policies",
+	"version": "0.0.0",
+	"description": "Get a list of all of Andrew Yang&#39;s policies for his 2020 campaign.",
+	"license": "MIT",
+	"repository": "brh55/yang-2020-policies",
+	"author": {
+		"name": "brh55",
+		"email": "brandonhim@live.com",
+		"url": "brandonhim.com"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"test": "xo && nyc ava",
+		"build-json": "node build-json.js"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		""
+	],
+	"dependencies": {
+		"request-promise-native": "^1.0.7"
+	},
+	"devDependencies": {
+		"ava": "^2.1.0",
+		"chalk": "^2.4.2",
+		"cheerio": "^1.0.0-rc.3",
+		"codecov": "^3.5.0",
+		"lodash.uniq": "^4.5.0",
+		"nyc": "^14.1.1",
+		"ora": "^3.4.0",
+		"request": "^2.88.0",
+		"xo": "^0.24.0"
+	},
+	"nyc": {
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	}
+}
