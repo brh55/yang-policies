@@ -1,4 +1,4 @@
-# yang-2020-policies [![Build Status](https://travis-ci.com/brh55/yang-2020-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-2020-policies) [![codecov](https://codecov.io/gh/brh55/yang-2020-policies/badge.svg?branch=master)](https://codecov.io/gh/brh55/yang-2020-policies?branch=master) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
+# Yang 2020 Policies [![Build Status](https://travis-ci.com/brh55/yang-2020-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-2020-policies) [![codecov](https://codecov.io/gh/brh55/yang-2020-policies/badge.svg?branch=master)](https://codecov.io/gh/brh55/yang-2020-policies?branch=master) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
 
 > A consumable JSON list of Andrew Yang's 2020 policies found on [yang2020.com](https://www.yang2020.com/policies/)
 
