@@ -39,5 +39,6 @@ Open to PR's to improve the JSON formatting, code quality, and anything else to 
 
 ## License
 The use of this module falls under MIT, use it to build and progress the Yang Gang. 
-Actual policy usages belongs to yang2020.com.
+
+If it isn't apparent, actual policy usages belongs to [yang2020.com](https://www.yang2020.com/).
 
