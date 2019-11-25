@@ -1,6 +1,6 @@
 {
 	"name": "yang-policies",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A consumable JSON list of Andrew Yang's 2020 policies found on yang2020.com",
 	"license": "MIT",
 	"repository": "brh55/yang-policies",
