@@ -63,14 +63,66 @@ const parsePolicy = (policyPage, url) => {
 	return policy;
 };
 
+const getPolicyOrder = policies => Object.fromEntries(policies.map((p, i) => [p.title, i]));
+const getPolicyMap = policies => Object.fromEntries(policies.map(p => [p.title, p]));
+
+const mergePolicies = (newPolicies, oldPolicies) => {
+	const titleToPolicy = {
+		...getPolicyMap(newPolicies),
+		// Newer policies get higher ordering priority
+		...getPolicyMap(oldPolicies)
+	};
+
+	const newPolicyOrder = getPolicyOrder(newPolicies);
+	const oldPolicyOrder = getPolicyOrder(oldPolicies);
+	const titleToOrder = {
+		...newPolicyOrder,
+		// Older policies get higher ordering priority
+		...oldPolicyOrder
+	};
+
+	const orderTitles = (t1, t2) => {
+		const t2Old = t2 in oldPolicyOrder;
+		switch (t1 in oldPolicyOrder) {
+			case true:
+				switch (t2Old) {
+					case true:
+						// Both policies are old, so use previous order
+						return oldPolicyOrder[t1] - oldPolicyOrder[t2];
+					/* First title was previously parsed,
+					   and the second title was not,
+					   then the first title should go first
+					*/
+					default:
+						return -1;
+				}
+
+			default:
+				switch (t2Old) {
+					case true:
+						/* Second was previously parsed,
+						   and first was not,
+						   so second goes first
+						*/
+						return 1;
+					default:
+						// Sort by ordering from this parse
+						return newPolicyOrder[t1] - newPolicyOrder[t2];
+				}
+		}
+	};
+
+	return Object.keys(titleToOrder).sort(orderTitles).map(title => titleToPolicy[title]);
+};
+
 const main = async () => {
 	const spinner = ora('Fetching Policies').start();
 	spinner.color = 'magenta';
 
 	const BASE_URL = 'https://www.yang2020.com';
 	const POLICY_MAIN_URL = `${BASE_URL}/policies`;
-
 	try {
+		const oldPolicies = JSON.parse(fs.readFileSync('policies.json'));
 		const mainPolicyPage = await rp(POLICY_MAIN_URL);
 		const $ = cheerio.load(mainPolicyPage);
 		const getPolicyLink = (i, el) => $(el).attr('href');
@@ -88,8 +140,9 @@ const main = async () => {
 		const policies = policyPages.map((html, index) => {
 			return parsePolicy(html, policyLinks[index]);
 		});
-		fs.writeFileSync('policies.json', JSON.stringify(policies, null, 2));
-		spinner.succeed(`${policies.length} Andrew Yang's Policies Saved in /policies.json`);
+		const orderPreservedPolicies = mergePolicies(policies, oldPolicies);
+		fs.writeFileSync('policies.json', JSON.stringify(orderPreservedPolicies, null, 2));
+		spinner.succeed(`${orderPreservedPolicies.length} Andrew Yang's Policies Saved in /policies.json`);
 		console.log(chalk.green('Commit the latest policies.json file, and publish on npm'));
 	} catch (error) {
 		console.error(error);
