@@ -1,5 +1,5 @@
 # Andrew Yang's 2020 Policies (`yang-policies`)
-[![Build Status](https://travis-ci.com/brh55/yang-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-2020-policies) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
+[![Build Status](https://travis-ci.com/brh55/yang-policies.svg?branch=master)](https://travis-ci.com/brh55/yang-policies) ![Yang Gang Badge](https://img.shields.io/badge/-Yang%20Gang-blue)
 
 > A consumable JSON list of Andrew Yang's 2020 policies found on [yang2020.com](https://www.yang2020.com/policies/)
 
